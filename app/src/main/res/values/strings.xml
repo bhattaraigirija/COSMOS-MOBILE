@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">COSMOS_MOBILE</string>
+
+    <string-array name="myDropdown">
+        <item>Select Course</item>
+        <item>BCE</item>
+        <item>BIT</item>
+        <item>CSIT</item>
+        <item>BCA</item>
+    </string-array>
+</resources>
