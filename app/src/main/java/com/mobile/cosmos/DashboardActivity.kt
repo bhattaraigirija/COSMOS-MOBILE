@@ -66,5 +66,17 @@ class DashboardActivity : AppCompatActivity() {
             true
         }
 
+        val profile = findViewById<LinearLayout>(R.id.layoutProfile)
+        profile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        val course = findViewById<LinearLayout>(R.id.layoutCourses)
+        course.setOnClickListener {
+            val intent = Intent(this, CourseActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/ic_back"/>
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="52dp"
+        android:src="@drawable/profile"
+        android:padding="4dp"/>
+
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ram Limbu"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/profileImage"
+        android:layout_centerHorizontal="true"
+        android:textColor="#0f0f0f"/>
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ramlimbu@gmail.com"
+        android:textSize="22sp"
+        android:layout_below="@+id/profileName"
+        android:layout_centerHorizontal="true"
+        android:textColor="#0f0f0f"/>
+
+    <TextView
+        android:id="@+id/profileBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Application Developer"
+        android:textSize="22sp"
+        android:layout_below="@+id/profileEmail"
+        android:layout_centerHorizontal="true"
+        android:textColor="#0f0f0f"/>
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileBio"
+        android:layout_centerHorizontal="true"
+        android:text="Edit Profile"
+        android:layout_marginTop="8dp"/>
+
+
+
+</RelativeLayout>
