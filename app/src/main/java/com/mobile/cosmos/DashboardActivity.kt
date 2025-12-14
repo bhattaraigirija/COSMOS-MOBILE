@@ -1,9 +1,11 @@
 package com.mobile.cosmos
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -35,6 +37,9 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
+        onBackPressedDispatcher.addCallback(this) {
+            showExitDialog()
+        }
 
         drawerLayout = findViewById(R.id.drawerLayout)
         navView = findViewById(R.id.navigationView)
@@ -50,17 +55,21 @@ class DashboardActivity : AppCompatActivity() {
         // Handle Drawer Menu Clicks
         navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> Toast.makeText(this,
-                    "Home Clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_home -> {
+                    startActivity(Intent(this, DashboardActivity::class.java))
+                }
 
-                R.id.nav_profile -> Toast.makeText(this,
-                    "Profile Clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                }
 
-                R.id.nav_courses -> Toast.makeText(this,
-                    "Courses Clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_courses -> {
+                    startActivity(Intent(this, CourseActivity::class.java))
+                }
 
-                R.id.nav_settings -> Toast.makeText(this,
-                    "Settings Clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_settings -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                }
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             true
@@ -77,6 +86,21 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, CourseActivity::class.java)
             startActivity(intent)
         }
+
+
+    }
+
+    fun showExitDialog() {
+        val exitDialog = AlertDialog.Builder(this)
+        exitDialog.setTitle("Exit App")
+        exitDialog.setMessage("Do you want to exit?")
+        exitDialog.setPositiveButton("Yes") { _, _ ->
+            finishAffinity()
+        }
+        exitDialog.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        exitDialog.show()
 
     }
 }
