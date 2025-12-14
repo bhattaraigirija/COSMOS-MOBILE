@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".SettingsActivity">
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="  Settings"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:drawableStart="@drawable/ic_back" />
+
+    <Button
+        android:id="@+id/btnChangeTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Theme"
+        android:layout_marginTop="22dp"/>
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About App"
+        android:layout_marginTop="6dp"/>
+
+    <Button
+        android:id="@+id/btnNavigateToProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Navigate Profile"
+        android:layout_marginTop="6dp"/>
+
+
+</LinearLayout>
