@@ -27,16 +27,17 @@ class ProfileActivity : AppCompatActivity() {
         //getting data from another activity
         val newName= intent.getStringExtra("name")
         val newEmail = intent.getStringExtra("email")
-        val newBio = intent.getStringExtra("bio")
+        val newAddress = intent.getStringExtra("address")
+//        val newBio = intent.getStringExtra("bio")
 
         //set new text
         if (!newName.isNullOrEmpty() &&
-            !newEmail.isNullOrEmpty() &&
-            !newBio.isNullOrEmpty()
+            !newEmail.isNullOrEmpty()
+//            !newBio.isNullOrEmpty()
         ) {
             name.text = newName
             email.text = newEmail
-            bio.text = newBio
+//            bio.text = newBio
         }
 
 

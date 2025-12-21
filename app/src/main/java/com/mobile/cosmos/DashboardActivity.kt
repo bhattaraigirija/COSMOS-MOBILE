@@ -1,8 +1,13 @@
 package com.mobile.cosmos
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -21,6 +26,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -88,6 +94,25 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val result = findViewById<LinearLayout>(R.id.layoutResult)
+        val attendance = findViewById<LinearLayout>(R.id.layoutAttendance)
+        val dashboardContent = findViewById<LinearLayout>(R.id.dashboardContent)
+        val btnRegister = findViewById<Button>(R.id.btnRegisterStudent)
+
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        result.setOnClickListener {
+            showDemoFragment(Result())
+            dashboardContent.visibility = View.GONE
+        }
+
+        attendance.setOnClickListener {
+            showDemoFragment(Attendance())
+            dashboardContent.visibility = View.GONE
+        }
 
     }
 
@@ -103,5 +128,19 @@ class DashboardActivity : AppCompatActivity() {
         }
         exitDialog.show()
 
+    }
+
+    fun showDemoFragment(fragment: androidx.fragment.app.Fragment){
+        val container = findViewById<FrameLayout>(R.id.demoFragment)
+        container.visibility = View.VISIBLE
+
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.slide_out
+            )
+            .add(R.id.demoFragment,fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
