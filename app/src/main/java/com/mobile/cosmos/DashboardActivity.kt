@@ -79,6 +79,7 @@ class DashboardActivity : AppCompatActivity() {
         profile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
         }
 
         val course = findViewById<LinearLayout>(R.id.layoutCourses)
