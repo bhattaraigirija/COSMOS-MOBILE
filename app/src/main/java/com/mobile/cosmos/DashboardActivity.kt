@@ -6,6 +6,7 @@ import android.app.Fragment
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -101,6 +102,11 @@ class DashboardActivity : AppCompatActivity() {
         val attendance = findViewById<LinearLayout>(R.id.layoutAttendance)
         val dashboardContent = findViewById<LinearLayout>(R.id.dashboardContent)
         val btnRegister = findViewById<Button>(R.id.btnRegisterStudent)
+        val btnNotification = findViewById<Button>(R.id.bthShowNotification)
+
+        btnNotification.setOnClickListener {
+            showNotification()
+        }
 
         btnRegister.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -121,18 +127,22 @@ class DashboardActivity : AppCompatActivity() {
 
     fun showNotification(){
         val channelId = "demo_channel"
-        val channel = NotificationChannel(
-            channelId,
-            "Test Notification",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-        getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Test Notification",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+        }
 
         val notification= NotificationCompat.Builder(this, channelId)
             .setContentTitle("This is notification")
             .setContentText("This is description of notification")
             .setSmallIcon(R.drawable.ic_notification)
             .build()
+
+        getSystemService(NotificationManager::class.java).notify(1,notification)
 
     }
 
