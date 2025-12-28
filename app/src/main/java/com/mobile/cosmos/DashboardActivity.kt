@@ -3,6 +3,8 @@ package com.mobile.cosmos
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Fragment
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -113,6 +116,23 @@ class DashboardActivity : AppCompatActivity() {
             showDemoFragment(Attendance())
             dashboardContent.visibility = View.GONE
         }
+
+    }
+
+    fun showNotification(){
+        val channelId = "demo_channel"
+        val channel = NotificationChannel(
+            channelId,
+            "Test Notification",
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+        getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
+
+        val notification= NotificationCompat.Builder(this, channelId)
+            .setContentTitle("This is notification")
+            .setContentText("This is description of notification")
+            .setSmallIcon(R.drawable.ic_notification)
+            .build()
 
     }
 
