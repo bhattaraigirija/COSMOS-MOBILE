@@ -28,6 +28,9 @@
         <activity
             android:name=".SecondActivity"
             android:exported="false" />
+        <service
+            android:name=".MyService"
+            android:exported="false"/>
         <activity
             android:name=".DashboardActivity"
             android:exported="true">

@@ -47,6 +47,9 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
+        val intent = Intent(this, MyService::class.java)
+        startService(intent)
+
         onBackPressedDispatcher.addCallback(this) {
             showExitDialog()
         }
