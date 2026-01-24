@@ -30,6 +30,17 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var navView: NavigationView
 
 
+    private fun backgroundTask(){
+        val thread = Thread{
+            Thread.sleep(7000)
+            runOnUiThread {
+                Toast.makeText(this,"Task Complete", Toast.LENGTH_LONG).show()
+            }
+        }
+        thread.start()
+    }
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +58,19 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
+        //start service
         val intent = Intent(this, MyService::class.java)
         startService(intent)
+
+        //stop service
+        val stopService = findViewById<Button>(R.id.btnStopService)
+        stopService.setOnClickListener {
+            stopService(intent)
+            backgroundTask()
+        }
+
+
+
 
         onBackPressedDispatcher.addCallback(this) {
             showExitDialog()
