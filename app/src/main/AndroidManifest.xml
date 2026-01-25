@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COSMOS_MOBILE">
         <activity
+            android:name=".UserListActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
@@ -28,9 +31,11 @@
         <activity
             android:name=".SecondActivity"
             android:exported="false" />
+
         <service
             android:name=".MyService"
-            android:exported="false"/>
+            android:exported="false" />
+
         <activity
             android:name=".DashboardActivity"
             android:exported="true">

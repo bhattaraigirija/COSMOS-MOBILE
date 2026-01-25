@@ -76,4 +76,79 @@ class DBHelper (context: Context) :
          return result !=-1L
     }
 
+    fun getAllUsers(): ArrayList<Users>{
+        val list = ArrayList<Users>()
+        val db = readableDatabase
+        val data = db.rawQuery("SELECT * FROM $TABLE_USER ORDER BY $COL_ID DESC",null)
+
+        if(data.moveToFirst()){
+            do{
+                val user = Users(
+                    id = data.getInt(data.getColumnIndexOrThrow(COL_ID)),
+                    name = data.getString(data.getColumnIndexOrThrow(COL_NAME)),
+                    phone = data.getString(data.getColumnIndexOrThrow(COL_PHONE)),
+                    email = data.getString(data.getColumnIndexOrThrow(COL_EMAIL)),
+                    address = data.getString(data.getColumnIndexOrThrow(COL_ADDRESS)),
+                    dob = data.getString(data.getColumnIndexOrThrow(COL_DOB)),
+                    password = data.getString(data.getColumnIndexOrThrow(COL_PASSWORD)),
+                    gender = data.getString(data.getColumnIndexOrThrow(COL_GENDER)),
+                    course = data.getString(data.getColumnIndexOrThrow(COL_COURSE)),
+
+                )
+                list.add(user)
+            }while (data.moveToNext())
+        }
+        data.close()
+        db.close()
+        return list
+    }
+
+
+//    fun getAllUsersById(userId: Int): Users {
+//        val db = readableDatabase
+//        val data =
+//            db.rawQuery("SELECT * FROM $TABLE_USER WHERE $COL_ID=?", arrayOf(userId.toString()))
+//        val user: Users
+//        if (data.moveToFirst()) {
+//            user = Users(
+//                id = data.getInt(data.getColumnIndexOrThrow(COL_ID)),
+//                name = data.getString(data.getColumnIndexOrThrow(COL_NAME)),
+//                phone = data.getString(data.getColumnIndexOrThrow(COL_PHONE)),
+//                email = data.getString(data.getColumnIndexOrThrow(COL_EMAIL)),
+//                address = data.getString(data.getColumnIndexOrThrow(COL_ADDRESS)),
+//                dob = data.getString(data.getColumnIndexOrThrow(COL_DOB)),
+//                password = data.getString(data.getColumnIndexOrThrow(COL_PASSWORD)),
+//                gender = data.getString(data.getColumnIndexOrThrow(COL_GENDER)),
+//                course = data.getString(data.getColumnIndexOrThrow(COL_COURSE)),
+//            )
+//        }
+//        data.close()
+//        db.close()
+//        return user
+//    }
+
+    fun deleteUser(userId: Int): Boolean{
+        val db = writableDatabase
+        val rows = db.delete(TABLE_USER,"$COL_ID=?", arrayOf(userId.toString()))
+        db.close()
+        return rows>0
+    }
+
+    fun updateUser(user: Users):Boolean{
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COL_NAME, user.name)
+            put(COL_ADDRESS, user.address)
+            put(COL_DOB, user.dob)
+            put(COL_EMAIL, user.email)
+            put(COL_PHONE, user.phone)
+            put(COL_PASSWORD, user.password)
+            put(COL_GENDER, user.gender)
+            put(COL_COURSE, user.course)
+        }
+        val rows = db.update(TABLE_USER, values, "$COL_ID=?",arrayOf(user.id.toString()))
+        db.close()
+        return rows>0
+    }
+
 }

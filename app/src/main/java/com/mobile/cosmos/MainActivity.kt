@@ -2,6 +2,7 @@ package com.mobile.cosmos
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.health.connect.datatypes.units.Length
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -15,6 +16,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+
+    private lateinit var db: DBHelper
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnRegister = findViewById<Button>(R.id.btnRegister)
+
+        db= DBHelper(this)
+        db.close()
 
         btnRegister.setOnClickListener {
             //for edit text
@@ -66,13 +74,25 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            //**--------DATA PASS--------**//
-            val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("name",name)
-            intent.putExtra("address",address)
-            intent.putExtra("email",email)
-            intent.putExtra("phone",phone)
-            startActivity(intent)
+            //**--------Insert users--------**//
+            val ok : Boolean
+            ok = db.insertUser(
+                name.toString(),
+                address.toString(),
+                dob.toString(),
+                email.toString(),
+                phone.toString(),
+                password.toString(),
+                "null",
+                course.toString()
+            )
+            if(ok){
+                Toast.makeText(this,"Inserted Successfully", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this,"Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+
+
         }
 
     }
