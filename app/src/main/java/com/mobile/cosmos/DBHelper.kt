@@ -76,65 +76,66 @@ class DBHelper (context: Context) :
          return result !=-1L
     }
 
-    fun getAllUsers(): ArrayList<Users>{
+    fun getAllUsers(): ArrayList<Users> {
         val list = ArrayList<Users>()
         val db = readableDatabase
-        val data = db.rawQuery("SELECT * FROM $TABLE_USER ORDER BY $COL_ID DESC",null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_USER ORDER BY $COL_ID DESC", null)
 
-        if(data.moveToFirst()){
-            do{
+
+        if (cursor.moveToFirst()) {
+            do {
                 val user = Users(
-                    id = data.getInt(data.getColumnIndexOrThrow(COL_ID)),
-                    name = data.getString(data.getColumnIndexOrThrow(COL_NAME)),
-                    phone = data.getString(data.getColumnIndexOrThrow(COL_PHONE)),
-                    email = data.getString(data.getColumnIndexOrThrow(COL_EMAIL)),
-                    address = data.getString(data.getColumnIndexOrThrow(COL_ADDRESS)),
-                    dob = data.getString(data.getColumnIndexOrThrow(COL_DOB)),
-                    password = data.getString(data.getColumnIndexOrThrow(COL_PASSWORD)),
-                    gender = data.getString(data.getColumnIndexOrThrow(COL_GENDER)),
-                    course = data.getString(data.getColumnIndexOrThrow(COL_COURSE)),
-
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME)),
+                    phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE)),
+                    email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL)),
+                    address = cursor.getString(cursor.getColumnIndexOrThrow(COL_ADDRESS)),
+                    dob = cursor.getString(cursor.getColumnIndexOrThrow(COL_DOB)),
+                    password = cursor.getString(cursor.getColumnIndexOrThrow(COL_PASSWORD)),
+                    gender = cursor.getString(cursor.getColumnIndexOrThrow(COL_GENDER)),
+                    course = cursor.getString(cursor.getColumnIndexOrThrow(COL_COURSE))
                 )
                 list.add(user)
-            }while (data.moveToNext())
+            } while (cursor.moveToNext())
         }
-        data.close()
+
+
+        cursor.close()
         db.close()
         return list
     }
 
 
-//    fun getAllUsersById(userId: Int): Users {
-//        val db = readableDatabase
-//        val data =
-//            db.rawQuery("SELECT * FROM $TABLE_USER WHERE $COL_ID=?", arrayOf(userId.toString()))
-//        val user: Users
-//        if (data.moveToFirst()) {
-//            user = Users(
-//                id = data.getInt(data.getColumnIndexOrThrow(COL_ID)),
-//                name = data.getString(data.getColumnIndexOrThrow(COL_NAME)),
-//                phone = data.getString(data.getColumnIndexOrThrow(COL_PHONE)),
-//                email = data.getString(data.getColumnIndexOrThrow(COL_EMAIL)),
-//                address = data.getString(data.getColumnIndexOrThrow(COL_ADDRESS)),
-//                dob = data.getString(data.getColumnIndexOrThrow(COL_DOB)),
-//                password = data.getString(data.getColumnIndexOrThrow(COL_PASSWORD)),
-//                gender = data.getString(data.getColumnIndexOrThrow(COL_GENDER)),
-//                course = data.getString(data.getColumnIndexOrThrow(COL_COURSE)),
-//            )
-//        }
-//        data.close()
-//        db.close()
-//        return user
-//    }
+    // ---------------- GET BY ID ----------------
+    fun getUserById(userId: Int): Users? {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_USER WHERE $COL_ID=?", arrayOf(userId.toString()))
 
-    fun deleteUser(userId: Int): Boolean{
-        val db = writableDatabase
-        val rows = db.delete(TABLE_USER,"$COL_ID=?", arrayOf(userId.toString()))
+
+        var user: Users? = null
+        if (cursor.moveToFirst()) {
+            user = Users(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)),
+                name = cursor.getString(cursor.getColumnIndexOrThrow(COL_NAME)),
+                phone = cursor.getString(cursor.getColumnIndexOrThrow(COL_PHONE)),
+                email = cursor.getString(cursor.getColumnIndexOrThrow(COL_EMAIL)),
+                address = cursor.getString(cursor.getColumnIndexOrThrow(COL_ADDRESS)),
+                dob = cursor.getString(cursor.getColumnIndexOrThrow(COL_DOB)),
+                password = cursor.getString(cursor.getColumnIndexOrThrow(COL_PASSWORD)),
+                gender = cursor.getString(cursor.getColumnIndexOrThrow(COL_GENDER)),
+                course = cursor.getString(cursor.getColumnIndexOrThrow(COL_COURSE))
+            )
+        }
+
+
+        cursor.close()
         db.close()
-        return rows>0
+        return user
     }
 
-    fun updateUser(user: Users):Boolean{
+
+    // ---------------- UPDATE ----------------
+    fun updateUser(user: Users): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COL_NAME, user.name)
@@ -146,9 +147,20 @@ class DBHelper (context: Context) :
             put(COL_GENDER, user.gender)
             put(COL_COURSE, user.course)
         }
-        val rows = db.update(TABLE_USER, values, "$COL_ID=?",arrayOf(user.id.toString()))
+
+
+        val rows = db.update(TABLE_USER, values, "$COL_ID=?", arrayOf(user.id.toString()))
         db.close()
-        return rows>0
+        return rows > 0
+    }
+
+
+    // ---------------- DELETE ----------------
+    fun deleteUser(userId: Int): Boolean {
+        val db = writableDatabase
+        val rows = db.delete(TABLE_USER, "$COL_ID=?", arrayOf(userId.toString()))
+        db.close()
+        return rows > 0
     }
 
 }
