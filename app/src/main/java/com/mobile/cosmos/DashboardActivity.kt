@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Fragment
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -41,6 +42,13 @@ class DashboardActivity : AppCompatActivity() {
     }
 
 
+    override fun attachBaseContext(newBase: Context) {
+        val lang = LocaleHelper().getLanguage(newBase)
+        val context = LocaleHelper().setLocale(newBase,lang)
+        super.attachBaseContext(context)
+    }
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +62,6 @@ class DashboardActivity : AppCompatActivity() {
                 view.paddingRight,
                 systemBars.bottom
             )
-
             insets
         }
 
@@ -70,6 +77,18 @@ class DashboardActivity : AppCompatActivity() {
         }
 
 
+        val btnEnglish = findViewById<Button>(R.id.buttonEng)
+        val btnNepali = findViewById<Button>(R.id.buttonNep)
+
+        btnEnglish.setOnClickListener {
+            LocaleHelper().setLocale(this,"en")
+            recreate()
+        }
+
+        btnNepali.setOnClickListener {
+            LocaleHelper().setLocale(this,"ne")
+            recreate()
+        }
 
 
         onBackPressedDispatcher.addCallback(this) {

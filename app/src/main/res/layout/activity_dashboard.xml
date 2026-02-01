@@ -64,7 +64,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Profile"
+                            android:text="@string/profile"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp" />
@@ -89,7 +89,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Courses"
+                            android:text="@string/courses"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp" />
@@ -123,7 +123,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Attendance"
+                            android:text="@string/atten"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp" />
@@ -148,7 +148,7 @@
                         <TextView
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
-                            android:text="Results"
+                            android:text="@string/results"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:layout_marginTop="8dp" />
@@ -161,24 +161,46 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Registration Form"/>
+                    android:text="@string/reg"/>
 
                 <Button
                     android:id="@+id/bthShowNotification"
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Show Notificaton"/>
+                    android:text="@string/notify"/>
                 <Button
                     android:id="@+id/btnStopService"
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Stop Service"/>
+                    android:text="@string/stop"/>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/buttonEng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="English" />
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="0dp"/>
+                    <Button
+                        android:id="@+id/buttonNep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nepali" />
+                </LinearLayout>
 
 
             </LinearLayout>
-
 
 
     </LinearLayout>

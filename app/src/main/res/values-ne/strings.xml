@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">कोस्मोस_मोबाइल</string>
+
+    <string-array name="myDropdown">
+        <item>कोर्स चयन गर्नुहोस्</item>
+        <item>बीसीई</item>
+        <item>बिटी</item>
+        <item>सीएसआईटी</item>
+        <item>बीसीए</item>
+    </string-array>
+
+    <string name="profile">प्रोफाइल</string>
+    <string name="courses">कोर्सहरू</string>
+    <string name="atten">उपस्थिति</string>
+    <string name="results">परिणाम</string>
+    <string name="reg">दर्ता फारम</string>
+    <string name="notify">सूचना देखाउनुहोस्</string>
+    <string name="stop">सेवा रोक्नुहोस्</string>
+</resources>
