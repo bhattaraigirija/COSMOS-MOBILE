@@ -105,6 +105,11 @@ class DashboardActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        findViewById<Button>(R.id.getData).setOnClickListener {
+            startActivity(Intent(this, ListActivity::class.java))
+        }
+
+
 
         // Handle Drawer Menu Clicks
         navView.setNavigationItemSelectedListener { item ->
